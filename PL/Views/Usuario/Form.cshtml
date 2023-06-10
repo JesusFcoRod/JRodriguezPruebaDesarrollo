@@ -1,0 +1,129 @@
+﻿﻿@model ML.Usuario
+
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>REGISTRO DE USUARIOS</h2>
+
+<br />
+
+@using (Html.BeginForm("Form", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+
+        <div class="col-md-3" style="display: none;">
+            @Html.TextBoxFor(model => model.IdUsuario, new { @class = "hidden form-control", autocomplete = "off" })
+        </div>
+
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.Nombre)
+            <div class="input-group mb-12">
+                <span class="input-group-text"><i class="bi bi-controller"></i></span>
+                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtName", @onblur = "ValidarTxt('txtName')" })
+                @Html.ValidationMessageFor(model => model.Nombre, null, new { @class = "text-danger" })
+            </div>
+            @Html.Label("", new { @id = "lblName" })
+        </div>
+
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.ApellidoPaterno)
+            <div class="input-group mb-2">
+                <span class="input-group-text"><i class="bi bi-controller"></i></span>
+                @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @id = "txtAP", @onblur = "ValidarTxt('txtAP')" })
+                @Html.ValidationMessageFor(model => model.ApellidoPaterno, null, new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.ApellidoMaterno)
+            <div class="input-group mb-2">
+                <span class="input-group-text"><i class="bi bi-controller"></i></span>
+                @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @id = "txtAM", @onblur = "ValidarTxt('txtAM')" })
+                @Html.ValidationMessageFor(model => model.ApellidoMaterno, null, new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.UserName)
+            <div class="input-group mb-2">
+                <span class="input-group-text"><i class="bi bi-controller"></i></span>
+                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @id = "txtUserName", @onblur = "ValidarTxt('txtUserName')" })
+                @Html.ValidationMessageFor(model => model.UserName, null, new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="col-md-3">
+                @Html.LabelFor(model => model.Password)
+                <div class="input-group mb-2">
+                    <span class="input-group-text"><i class="bi bi-controller"></i></span>
+                    @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @id = "txtPass", @onblur = "ValidarTxt('txtPass')" })
+                    @Html.ValidationMessageFor(model => model.Password, null, new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.FechNacimiento, "Fecha de Nacimiento: ")
+            <div class="input-group mb-2">
+                <span class="input-group-text"><i class="bi bi-controller"></i></span>
+                @Html.TextBoxFor(model => model.FechNacimiento, new { @class = "form-control", @id = "txtFechaNacimiento", @onblur = "ValidarTxt('txtFechaNacimiento')" })
+                @Html.ValidationMessageFor(model => model.FechNacimiento)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.LabelFor(model => model.Rol)
+                @Html.DropDownListFor(model => model.Rol.IdRol, new SelectList(Model.Rol.Roles, "IdRol", "NombreRol"), "Seleccione un Rol", new { @class = "form-control" })
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="glyphicon-up">
+            <div class="form-group">
+                <div class="col-md-3">
+                    <br />
+                    <br />
+                    <input type="submit" value="Guardar" class="btn btn-success" />
+                    @Html.ActionLink("Regresar", "GetAll", "Usuario", htmlAttributes: new { @class = "btn btn-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+            $("#txtFechaNacimiento").datepicker({
+                dateFormat: 'dd/mm/yy',
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+
+        function ValidarTxt(idTxtBox) {
+            var val = document.getElementById(idTxtBox).value;
+            if (val == "") {
+                alert("No se pueden dejar campos vacios");
+            }
+            else {
+                $('#' + idTxtBox).css({ "border-color": "green", "background-color": "#aee3aa" });
+                return true;
+            }
+        }
+
+    </script>
+}

@@ -1,0 +1,63 @@
+﻿﻿@model ML.Rol
+
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>REGISTRO DE ROLES</h2>
+
+<br />
+
+@using (Html.BeginForm("Form", "Rol", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+
+        <div class="col-md-3" style="display: none;">
+            @Html.TextBoxFor(model => model.IdRol, new { @class = "hidden form-control", autocomplete = "off" })
+        </div>
+
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.NombreRol)
+            <div class="input-group mb-12">
+                <span class="input-group-text"><i class="bi bi-controller"></i></span>
+                @Html.TextBoxFor(model => model.NombreRol, new { @class = "form-control", @id = "txtName", @onblur = "ValidarTxt('txtName')" })
+                @Html.ValidationMessageFor(model => model.NombreRol, null, new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="glyphicon-up">
+            <div class="form-group">
+                <div class="col-md-3">
+                    <br />
+                    <br />
+                    <input type="submit" value="Guardar" class="btn btn-success" />
+                    @Html.ActionLink("Regresar", "GetAll", "Rol", htmlAttributes: new { @class = "btn btn-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+    <script type="text/javascript">
+
+        function ValidarTxt(idTxtBox) {
+            var val = document.getElementById(idTxtBox).value;
+            if (val == "") {
+                alert("No se pueden dejar campos vacios");
+            }
+            else {
+                $('#' + idTxtBox).css({ "border-color": "green", "background-color": "#aee3aa" });
+                return true;
+            }
+        }
+
+    </script>

@@ -1,0 +1,12 @@
+﻿@model ML.Mensaje
+@{
+    ViewBag.Title = "MostrarMensaje";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach (ML.Mensaje mensaje in Model.Mensajes)
+{
+
+    <h1 style="text-align:center">@mensaje.Contenido</h1>
+}
+

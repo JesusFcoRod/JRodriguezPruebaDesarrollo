@@ -1,0 +1,44 @@
+﻿﻿@model ML.Usuario
+@{
+    ViewData["Title"] = "LoginPersona";
+    Layout = null;
+}
+
+<head>
+    <link rel="stylesheet" href="~/Scripts/LoginPersona.css" />
+</head>
+
+@using (Html.BeginForm("LoginPersona", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Prueba-Login or Sign up</title>
+    </head>
+    <body>
+        <main>
+            <div class="row">
+                <div class="colm-logo">
+                    <img src="~/Content/LoginIMG.jpg" alt="Logo">
+
+                </div>
+                <div class="colm-form">
+                    <div class="form-container">
+                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @id = "txtUserName", @placeholder = "Username" })
+                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @id = "txtPassword", @placeholder = "Password" })
+                        <button class="btn-login">Ingresar</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <div class="footer-contents">
+                <small>Prueba de Desarrollo © 2023</small>
+            </div>
+        </footer>
+    </body>
+</html>
+}
